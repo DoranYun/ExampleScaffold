@@ -16,7 +16,7 @@ const routes: Routes = [
 ];
 
 // 根据 layout 分类路由
-routerConfig.forEach(({ module, path, ...other }) => {
+routerConfig.forEach(function({ module, path, ...other }) {
   const routerItem = {
     ...other,
     path: removeDiagonal(path),
@@ -27,8 +27,12 @@ routerConfig.forEach(({ module, path, ...other }) => {
 
 // 加载页面模块的 module 定义。
 const modules = routerConfig
-  .filter((router) => router.hasOwnProperty('module'))
-  .map((router) => router.module);
+  .filter(function(router) {
+    return router.hasOwnProperty('module');
+  })
+  .map(function(router) {
+    return router.module;
+  });
 
 @NgModule({
   imports: [RouterModule.forChild(routes), ...modules],
